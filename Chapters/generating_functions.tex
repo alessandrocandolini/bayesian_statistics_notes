@@ -1,0 +1,60 @@
+
+%*******************************************************
+% Chapter 1
+%*******************************************************
+
+\myChapter{Generating functions}
+\label{chapt:generating_functions}
+\begin{refsection}
+Generating functions are a overwealming  weapon to attack irresistable problems
+which fail a 
+more straightforward approach. 
+In this section we will introduce the notion of generating function, we will
+establish the relevant properties and we apply the technique of generating
+functions to few prototypical examples, in particular involving the famous
+Fibonacci numbers and the integer partitions. 
+In later chapters, the technique of generating functions will prove useful for
+example to deal with Galton-Walton problem.
+In statistical mechanics, the generating function approach is related to the
+grancanonical partition function.
+The main source for this chapter is \cite{Wilf:1994}.
+
+
+   \section{Fibonacci numbers as a prototype}
+   \label{sec:fibonacci}
+   The  sequence $(\Fibonacci{n})_{n\in\N}$  of Fibonacci numbers can be defined in a number of equivalent ways and
+historically made its first appearance in connection with a combinatorial
+model (the rabbit's population model described below).
+One definition is the following: the sequence $(\Fibonacci{n})_{n\in\N}$ of
+Fibonacci numbers is defined as 
+the \emph{unique} solution of 
+\begin{dmath}[label={Fn}]
+   F_{n+2} = F_{n} + F_{n+1} \condition*{n\in\N}
+\end{dmath}
+satisfying the initial conditions
+\begin{dseries}
+   \begin{math}
+      F_{0} = 1
+   \end{math},
+   \begin{math}
+      F_{1} = 1
+   \end{math}.
+\end{dseries}
+\Cref{eq:Fn} is a second-order homogeneous linear recursive equation with
+constant coefficients, the general theory of such equations ensure that there
+exists one and only one solution of it satisfying the initial valued problem.
+
+
+
+
+
+
+   \section{Definition and properties of generating functions}
+
+   \section{Solution of Fibonacci recurrence using generating functions}
+
+   
+
+\printbibliography[heading=subbibliography]
+
+\end{refsection}

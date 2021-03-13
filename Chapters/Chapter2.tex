@@ -1,0 +1,98 @@
+
+%*******************************************************
+% Chapter 1
+%*******************************************************
+
+\myChapter{Random variables}
+\label{chap:random_variables}
+
+\begin{refsection}
+
+   Discrete and continuous, univariate and multivariate real random variables are
+   discussed, together with a bunch of practical tools helping to handle with
+   them, specifically: probability
+   density function, cumulative distribution function, moments
+   (\ie, mean, variance, skewness, kurtosis, etc).
+   All of this provides a more concrete, visualizable approach to probability
+   built on top of the
+   construction of the previous chapter by means of probability measures; it should be stressed however
+   that the probability measures provides a more general framework. 
+   This chapter also covers functions of random variables, change of variables
+   (\ie, what physicists are accustomed to call ``propagation of errors''), etc.
+   Generating functions --- another useful tool to deal with probability
+   distributions --- are postponed to \cref{chapt:generating_functions}: an
+   entire chapter is devoted to them 
+   since their theory and their application deserve special attention. 
+   More general  random variables (\eg, matrix-valued random variables)
+   although useful are not presented here (see however
+   \cref{chap:random_matrices}, which is 
+   devoted to a brief account of random matrix
+   theory).
+
+   \section{Definitions and basic properties}
+
+      Let 
+      \begin{inparaenum}[(a)]
+      \item $(\Omega, \Sigma, \P{\cdot})$ be any probability space;
+	 \item $(E, \epsilon)$ be any measure space;
+	 \item $\fullfunction{X}{\Sigma}{E}$ be any (measurable) function from
+	    $\Sigma$ to $E$.
+      \end{inparaenum}
+      In this context: $\Omega$ is called the ``sample space'', $E$ is called ``state space'',
+      $X$ is called a ``random variable'', ``aleatory variable'' or ``stochastic variable''.
+
+      Whenever the range $X(\Sigma) \subseteq E$ of $X$ has finite or countably
+      infinite cardinality, the
+      random variable $X$ is called a ``discrete'' random variable.
+      When the range of $X$ is uncountably infinite instead, $X$ is called a
+      ``continous'' random variable. 
+
+      In this chapter, we will be mainly interested in the  case of \emph{real}-valued
+      (discrete or continuous) univariate (\ie, $E \subset \R$) or multivariate
+      (\ie, $E\subseteq \R^{N}$, $N\in\N$, $N\geq 2$) random variables (the
+      Borel algebra being the underlying $\sigma$-algebra in the state space).
+      For such case, it makes sense and it proves useful to introduce the
+      important concepts of moments, distribution functions, etc. (Those definitions are
+      slightly different whether the random variable is discrete or continuous
+      and univariate or multivariate,
+      as we will see shortly.)
+      However, the definition of random variables applies to more general
+      settings; for example, in \cref{chap:random_matrices} the case where $E$
+      is a suitable space  of matrices 
+      will be taken into account.
+      Other scenarios are also possible (\eg, random graphs, etc) some being
+      relevant for statistical mechanics, machine learning, etc (see later chapters).
+
+
+   It is worth notice that random variables take value over the set $E$,
+   nevertheless $E$ is not the probability space itself; the random variable
+   instead is defined as a mapping defined over a suitable $\sigma$-algebra
+   of an underlying probability
+   space $\Omega$ and targetting the (measure) state space $E$. 
+
+   What is the benefit of having defined a random variable as a mapping from a
+   probability space to the state space $E$ instead of having $E$ itself
+   equipped with a suitable probability
+   measure?
+
+   \section{Probability distribution}
+
+   In most applications, the underlying probability space defining a random
+   variable remains hidden.
+   Instead, a ``distribution function'' is introduced which 
+
+
+
+   \subsection{Univariate discrete random  variable}
+   \subsection{Univariate continuous random variable}
+   \subsection{Multivariate discrete random variable}
+   \subsection{Multivariate continuous random variable}
+
+   \section{Moments of a distribution}
+   \section{Transformations of random variables}
+   \section{Buffon's needle}
+
+   \section{What's  the use of all this?}
+
+\printbibliography[heading=subbibliography]
+\end{refsection}

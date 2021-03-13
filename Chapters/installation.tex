@@ -1,0 +1,291 @@
+
+%*******************************************************
+% HDF5 chapter
+%*******************************************************
+
+\myChapter{Installing Android SDK}
+
+This appendix goes through the steps needed to install and configure
+properly all
+the appropriate tools to setup an Android development environment and
+to get started developing Android applications%
+\footcite[Refer for example to][\S~1 for further
+details.]{Mednieks.Dornin.ea:2012}.
+
+\section{Installation of the tools}
+
+To setup a suitable framework for developing Android applications, the following are
+needed:
+\begin{itemize}
+   \item latest Java Development Kit (JDK)
+   \item latest Eclipse Integrated Development Environment (IDE)
+   \item latest Android SDK
+   \item latest Android Development Tools (ADT) Plu-in for Eclipse
+\end{itemize}
+
+The use of Eclipse is not strictly necessary of course, but it is strongly
+suggested, since it greatly simplifies
+writing, organizing, compiling, maintaining and debugging the soource code, and
+there is an active community to consult online%
+\autocite[Regarding the use of Eclipse for developing Android Apps,
+see in particular][]{Cinar:2012}
+The JDK and SDK tools are mandatory.
+
+\subsection{Installing JDK\label{sec:JDK}}
+
+First of all, we need to install the Java Development Kit (JDK).
+This can be freely downloaded from the Oracle's website%
+%\autocite{Onl-orac:2014}.
+\footnote{Visit
+   \url{http://www.oracle.com/technetwork/java/javase/downloads/index.html}}.
+There are automatic installers for \macos{} and \windows{} platform.
+On \linux{}, download the archive, extract the JDK folder, then some
+additional configuration is needed to make the JDK available and properly
+configured, please follow instructions in the install file.
+
+
+\subsection{Installing Eclipse IDE\label{sec:Eclipse}}
+
+Download the most recent version of Eclipse, available through
+the Eclipse's website%
+%\autocite{Onl-ecli:2014}.
+\footnote{Visit \url{http://www.eclipse.org/downloads/}}.  
+Eclipse comes with several packages available.
+A possible choice it to select 
+the \emph{Java EE Developer package} (the ``Enterprise
+Edition''), although the Eclipse classic or the Eclipse standard Developer
+package will work as well.
+
+Once you've decompressed the downloaded archive, you'll have a folder called eclipse.
+Simply drag this entire folder to the Applications folder.
+You can run the Eclipse IDE by clicking on the application icon inside the
+folder.
+
+\subsection{Installing Android SDK\label{sec:SDK}}
+
+The Android SDK is a collection of files. 
+There is no installation script.
+To install the SDK, download the SDK package that corresponds to your system%
+\footnote{Visit
+   \url{http://developer.android.com/sdk/installing/index.html?pkg=tools}}.
+The download is an archive.
+Open the archive and extract the folder at the top level of the archive where
+you want to install it, for example in your home folder.
+
+
+\subsubsection{The SDK manager\label{sec:SDK_manager}}
+
+The SDK manager allows you to install packages in the SDK that will support
+multiple versions of the Android OS and multiple API levels.
+For example, when the SDK Tools are updated or a new version of the Android
+platform is released, you can use the SDK Manager to quickly download them to
+your environment.
+
+In \cref{sec:ADT} we will install the ADT plugin for Eclipse, and after that
+you will be able to launch the SDK manager also via Eclipse.
+For the time being, assuming that you have not installed the AVT plugin yet, we
+will run the SDK Manager directly from its installation folder. 
+
+\begin{remark}
+   For easy access to the SDK tools from a command line, add the location
+   of the SDK's tools/ and platform-tools to your PATH environment variable.
+\end{remark}
+
+Here is an outline of the packages required and some which are recommended by
+the Android website:
+\begin{description}
+   \item[SDK Tools]
+      Required. 
+      Your new SDK installation already has the latest version. Make sure you
+      keep this up to date.
+   \item[SDK Platform-tools]
+      Required. You must install this package when you install  the SDK for the
+      first time. 
+   \item[SDK Platform]
+      Required.
+      You must download at least \emph{one platform} into your environment so
+      you are able to compile your application.
+      In order to provide the best user experience on the latest devices, we
+      recommend that you use the latest platform version as your build target.
+      You'll still be able to run your app on older versions, but you must
+      build against the latest version in order to use new features when
+      running on devices with the latest version of Android.
+   \item[System image]
+      Recommended.
+      It's a good practice to download system images for all versions of
+      Android that your app will support and test your app running on
+      them using the Android emulator.
+   \item[Android support]
+      Recommended.
+      It is not mandatory, however please consider that all of the activity
+      templates available when creating a new project with the ADT Plugin
+      (\cref{sec:ADT}) require this.
+\end{description}
+
+The above list is not comprehensive and you can add new sites to download
+additional packages from third-parties.
+
+\subsection{Setting ADT plugin for Eclipse\label{sec:ADT}}
+
+\subsubsection{Installing the ADT}
+
+We will use the Install New Software Wizard to download and install the ADT
+plugin in Eclipse%
+\footnote{The most recent documentation on how to install the ADT can be found
+   at \url{http://developer.android.com/sdk/installing/installing-adt.html}}.
+Proceed through the following steps:
+\begin{enumerate}
+   \item Launch Eclipse on your computer
+   \item Start Eclipse, then select Help > Install New Software.
+    \item Click Add button, in the top-right corner.  In the Add Repository dialog that
+      appears, enter "ADT Plugin" for the Name and the following URL for the
+      Location: \url{https://dl-ssl.google.com/android/eclipse/}.
+      Note: The Android
+      Developer Tools update site requires a secure connection. Make sure the
+      update site URL you enter starts with HTTPS.
+   \item Click OK button
+   \item In the Available Software dialog, select the checkbox next to
+      Developer Tools and click Next.
+   \item In the next window, you'll see a list of the tools to be downloaded.
+      Click Next.
+   \item Read and accept the license agreements, then click Finish.
+      If you get a security warning saying that the authenticity or validity of
+      the software can't be established, click OK.
+   \item When the installation completes, restart Eclipse.
+\end{enumerate}
+
+\begin{figure}
+   \centering
+   \includegraphics[width=.7\textwidth]{./Images/ADT_installer.png}
+   \caption{Screenshot of using the Install New Software Wizard to download and
+      install the ADT plugin in Eclipse}
+\end{figure}
+
+\subsubsection{Configuring the ADT}
+
+\section{Install additional tools}
+
+In this section we discuss some additional tools and alternatives which can be helpful to work
+with the Android emulator, namely
+\begin{itemize}
+   \item \intelHAXM{} driver
+   \item \genymotion{} Android emulator
+\end{itemize}
+
+\subsection{\intelHAXM{}\label{sec:HAXM}}
+
+This section will guide through installing the Intel\copyright{} Hardware Accelerated
+eXecution Manager (\intelHAXM), a hardware-assisted virtualization engine
+(hypervisor) that uses Intel\copyright{} Virtualization Technology (VT) to speed up
+AVD emulator performance.
+The instructions and information in this section are taken from the official Intel\copyright{} webpage%
+\footnote{Check the following URL and subpages: %Visit 
+  % \url{https://software.intel.com/en-us/android/articles/installation-instructions-for-intel-hardware-accelerated-execution-manager-mac-os-x}}.
+  \url{https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager}}.
+Check this page for updated information.
+
+The \intelHAXM{} is freely available for download.
+\intelHAXM{}
+requires that your development environment runs on Intel
+hardware, in particular the following requirements are needed:
+\begin{itemize}
+   \item Hardware requirements:
+      \begin{itemize}
+   \item Intel\copyright{} processor with support for Intel\copyright{} VT-x,
+      Intel\copyright{} EM64T (Intel\copyright{}
+      64), and Execute Disable (XD) Bit functionality
+   \item At least 1 GB of available RAM
+\end{itemize}
+\item Supported operating systems:
+   \begin{itemize}
+   \item Mac OS X: Mac OS X 10.6 (32/64-bit) or 10.7 (32/64-bit) or 10.8 (64-bit) or
+      10.9 (64-bit)
+   \item Microsoft Windows: Windows 8 and 8.1 (32/64-bit), Windows 7
+      (32/64-bit), Windows Vista* (32/64-bit) 
+\end{itemize}
+\end{itemize}
+As prerequisite, Android SDK (version 17 or higher) should be
+available in your developer environment (we have installed it in \cref{sec:SDK}).
+
+
+
+
+To uninstall Intel HAXM on a Mac, open a terminal window and execute this
+command:
+\begin{lstlisting}
+	$ sudo /System/Library/Extensions/intelhaxm.kext/Contents/Resources/uninstall.sh
+\end{lstlisting}
+You will be prompted for your current user password. Follow the uninstaller
+prompts to remove \intelHAXM{}.
+
+Warning: Close all instances of the Android x86 emulator before removing
+\intelHAXM{}. \intelHAXM{} cannot be removed while in use.
+
+\subsection{\genymotion{}\label{sec:genymotion}}
+
+Genymotion is an emulator using x86 architecture virtualization, which makes it much
+more efficient. 
+Taking advantage of OpenGL hardware acceleration, it allows you to test your
+applications with amazing 3D performance.
+The performance of the \genymotion{} emulator makes it  particularly well-suited
+for everyday support while developing
+new functionalities and when you would like to check quickly how the new work
+done looks on
+an the emulator.
+Furthermore,
+it offers interesting command line tools to build complex tests.
+
+\genymotion{} is available for 
+Windows, Mac and Linux. The base version is free.
+\genymotion{} can be easily integrated within the Eclipse IDE.
+
+For a full list of features and installation requirements, see the official
+webpage%
+\footnote{Visit \url{https://cloud.genymotion.com/page/doc/}}.
+
+\subsubsection{\genymotion{} Installation}
+
+\genymotion{} requires Oracle VirtualBox >= 4.2.12 (greater is better) to be
+installed. 
+
+To install \genymotion{} you need to 
+\begin{itemize}
+   \item Create an account on \genymotion{} website, if you don't have already
+      one.
+   \item Download and install Oracle VirtualBox, if you don't have it already
+      installed in your computer.
+   \item Download \genymotion{} from the official website.
+   \item Follow the instructions in the installer.
+\end{itemize}
+
+After lauching \genymotion{}, you should login with an existing \genymotion{}.
+Once connected, you will see all the available virtual devices, and you will be
+able to select the desired device and to run it.
+
+\subsubsection{Installing \genymotion{} Eclipse plugin}
+
+The plugin can be installed using the Install New Software Wizard, in much the
+same way we have followed for installing the AVT plugin (\cref{sec:AVT}). Of course, we need to change the
+source URL when Eclipse should look for the plugin. The details steps are as
+follows:
+ \begin{enumerate}
+   \item Launch Eclipse on your computer
+   \item Start Eclipse, then select Help > Install New Software.
+    \item Click Add button, in the top-right corner.  In the Add Repository dialog that
+       appears, enter any name (\eg, ``\genymotion{}'') for the Name field and the following URL for the
+      Location field: \url{http://plugins.genymotion.com/eclipse}
+   \item Click OK button
+   \item In the Available Software dialog, select the checkbox next to
+      Developer Tools and click Next.
+   \item In the next window, you'll see a list of the tools to be downloaded.
+      Click Next.
+   \item Read and accept the license agreements, then click Finish.
+      If you get a security warning saying that the authenticity or validity of
+      the software can't be established, click OK.
+   \item When the installation completes, restart Eclipse.
+\end{enumerate}
+
+     
+\section{Configuring and running the AVD\label{sec:AVD}}
+
+\section{Keeping up-to-date\label{sec:keeping_updated}}

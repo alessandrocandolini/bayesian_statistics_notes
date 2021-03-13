@@ -1,0 +1,603 @@
+
+%*******************************************************
+% Chapter 1
+%*******************************************************
+
+\myChapter{Rudiments of combinatorial analysis}
+
+\begin{refsection}
+
+Combinatorics is a branch of discrete mathematics mainly concerned with existence,
+enumeration, classification and optimization of arrangements of
+elements  of a given set according to 
+prescribed rules, providing powerful tools to count, manage and establish
+properties of these
+arrangements. 
+A review of the very basic  of the subject is mandatory here, since 
+even the simplest exercises in probability (in the context of finite sample spaces having equally likely outcomes)
+naturally demand for such tools to count in a smart way the number of certain
+configurations in the sample space. 
+(In fact, from an historical perspective, combinatorics was strongly motivated
+by applications in 
+probability.)
+Much of the material presented here should be already well-known to a broad audience from
+undergraduate (or maybe even high-school) courses, nevertheless we collect here
+few important techniques  in combinatorial calculus which were used throughout the notes. 
+Combinatorial problems can
+quickly evolve 
+from straightfoward to highly non-trivial and intractable ones and can make
+their appearence in unexpected contexts: the final sections are devoted to few
+more advanced topics maybe not directly related to probability aimed at
+providing a 
+flavor of what the whole combinatorics is all about, in order the Reader to acquire a broader
+perspective 
+on the field of combinatorics, in
+particular with an eye to applications in physics. 
+
+Many books were written on combinatorics. 
+The main sources for this chapter are:
+\begin{itemize}
+   \item\textcite[][\S~1]{Comtet:1974}
+   \item\textcite[][\S~2]{Feller:1966}
+\end{itemize}
+for exercises, refer \eg{} to 
+\begin{itemize}
+   \item\textcite[][\S~1]{Ross:2010}.
+\end{itemize}
+
+
+\section{Factorials and binomial coefficient}
+The factorial, binomial and multinomial coefficient of non-negative integer numbers are defined and their basic
+properties established. 
+They appear quite naturally in many combinatorial problems. 
+The reader should be already familiar with these topics from elementary calculus
+courses. 
+Generalization to non-integer arguments 
+is possibile but it is postponed until  \cref{sec:complex_factorial}.
+
+
+   \subsection{Factorial and binomial coefficient of non-negative integer numbers}
+\label{sec:integer_factorial}
+
+   Let $\N$ denotes as usual the set of non-negative integer numbers.
+   
+   \begin{definition}[factorial]
+      The ``factorial'' of 
+      $n\in\N$,
+      customarily denoted by $\Factorial{n}$%
+      \footnote{The modern notation $\Factorial{n}$ was introduce by Christian Kramp
+	 in 1808.},
+ is defined by  induction by letting
+      \begin{enumerate}
+	 \item\label{item:factorial1}
+	    \begin{math} 
+	       \Factorial{0} = 1
+	    \end{math};
+	 \item\label{item:factorial2}
+	    \begin{math}
+	       \Factorial{n} = n \Factorial{(n-1)} \condition*{\forall n \in \N
+		  \backslash\{0\}}
+	    \end{math}.
+      \end{enumerate}
+   \end{definition}
+   Alternatively, the factorial can be defined equivalently by
+\begin{enumerate}
+	 \item
+	    \begin{math} 
+	       \Factorial{0} = 1
+	    \end{math};
+	 \item
+	    \begin{math}
+      \Factorial{n}= \prod_{k=1}^{n} k \condition*{\forall n \in \N \backslash\{0 \}}
+	    \end{math}.
+      \end{enumerate}
+
+      Roughly speaking,  both definitions make evident that $\Factorial{n}$
+      represents, for $n>0$, the product of the first $n$-th
+      non-negative integer numbers:
+      \begin{dmath*}
+	 \Factorial{n} = \underbrace{1 \cdot \ldots   \cdot n}_{\mathclap{\text{Product
+		  of $n$ terms}}}
+      \end{dmath*}.
+
+   The position $\Factorial{0} = 1$ reflects the empty product
+   convention, which states that the result of multiplying no factors is assumed by convention
+   to be equal to 1. 
+   It might look rather artificial at this step, but it proves convenient to
+   write in a more compact way many recursive formulas involving factorials, 
+   (\eg, it simplifies some 
+   power series expansion formulas), 
+   it allows a combinatorial interpretation, and it is consistent with the
+   generalization of factorials to arbitrary real and complex numbers by means of the
+   gamma function, to be discussed later in 
+      \cref{sec:complex_factorial}.
+
+
+   \begin{definition}[Binomial coefficient]
+      \label{def:binomial}
+      Let $n,k\in\N$ be any non-negative integer numbers with $0\leq k \leq n$.
+      The ``binomial coefficient'' of $n$ and $k$, 
+      traditionally denoted by
+      $\binom{n}{k}$%
+      \footnote{The modern notation $\binom{n}{k}$ was introduced by A. von
+	 Ettinghausen in 1826.},
+      is defined by
+      \begin{dmath}[label={binom:def}]
+	 \binom{n}{k} \coloneqq \frac{\Factorial{n}} { \Factorial{k}
+	    \Factorial{(n-k)}} 
+      \end{dmath}.
+   \end{definition}
+
+
+   \begin{remark}
+      The definition of $\binom{n}{k}$ here is necessarily rectricted to $0\leq k \leq n$
+      in order  $n-k$ to be always a non-negative integer, so that
+      $\Factorial{(n-k)}$ makes sense using the
+      definition made so far. 
+      Sometimes, $\binom{n}{k}$ is extended to arbitrary large $k\in\N$ by setting
+      \begin{dmath}[label={binom:k>n}]
+	 \binom{n}{k} =0 \condition*{\forall k >  n}
+      \end{dmath}.
+      The range of allowed arguments can be further extend: in
+      \cref{sec:complex_factorial} the binomial coefficient  of two arbitrary
+      complex numbers will be defined (thus including as special case also the
+      binomial of negative integer arguments). 
+      We shall see that such extension is consistent with  \cref{eq:binom:k>n}.
+   \end{remark}
+
+Among the many identities involving the binomial coefficients, this section
+focuses on few basic ones. 
+
+\begin{lemma}[Symmetry]
+   For every $n,k\in\N$, 
+with $0\leq k \leq n$,
+   \begin{dmath}[label={binom:reflection}]
+      \binom{n}{k} = \binom{n}{n-k}
+   \end{dmath}.
+\end{lemma}
+\begin{proof}
+   \begin{dmath*}[compact]
+      \binom{n}{n-k} = \frac{\Factorial{n}} { \Factorial{(n-k)}
+	 \Factorial{(n-(n-k))}} = \frac{\Factorial{n}} {\Factorial{(n-k)}
+	 \Factorial{k}} = \binom{n}{k}
+   \end{dmath*}.
+\end{proof}
+
+\begin{lemma}[Pascal's rule]
+   For every $n,k\in\N$,
+with $0\leq k < n$,
+   \begin{dmath}[label={binom:pascal},frame]
+      \binom{n+1}{k+1} = \binom{n}{k} + \binom{n}{k+1}
+   \end{dmath}.
+\end{lemma}
+
+\begin{remark}
+   According to \cref{def:binomial}, $\binom{n}{k}$ makes sense for $0\leq
+k \leq n$, $\binom{n}{k+1}$ makes sense 
+for $0 \leq k+1 \leq n$ and $\binom{n+1}{k+1}$ makes sense for $0 \leq
+k +1 \leq n+1$. 
+Since we have not defined the binomial coefficient when $k$ takes negative
+integer 
+values, 
+\cref{eq:binom:pascal} does not allow to compute $\binom{n+1}{0}$ since it
+would require to set $k=-1$ on the left-hand side,  and this would make
+$\binom{n}{-1}$ appearing on the right-hand side. 
+Moreover, setting $n=k$ in order to compute $\binom{n+1}{n+1}$ on the left-hand
+side would make $\binom{n}{n+1}$ appearing on the right-hand side (this problem
+can be circumvent however by using the above convention for $k> n$).
+However, both scenarions are easy to treated: $\binom{n+1}{0} =
+\binom{n+1}{n+1}  = 1$.  For this reason, we restrict the formula to $0\leq k <
+n$.
+\end{remark}
+
+\begin{remark}
+   Equivalenty, by replacing $k' = k+1$, we have
+   \begin{dmath}[label={binom:pascalk}]
+      \binom{n+1}{k} = \binom{n}{k-1} + \binom{n}{k}
+   \end{dmath}
+   with $1 \leq k \leq n$.
+\end{remark}
+
+\begin{proof}
+  A direct  calculation shows that 
+     \begin{dmath*}
+	\binom{n}{k} + \binom{n}{k+1 } 
+	= 
+	\frac{\Factorial{n}}{\Factorial{k}\Factorial{(n-k)}}
+	+ 
+	\frac{\Factorial{n}}{\Factorial{(k+1)}\Factorial{(n-k-1)}}
+	= 
+	\frac{\Factorial{n}(k+1)}{\Factorial{(k+1)}\Factorial{(n-k)}}
+	+ 
+	\frac{\Factorial{n}(n-k)}{\Factorial{(k+1)}\Factorial{(n-k)}}
+	= 
+	\frac{\Factorial{n}[(k+1) + (n-k)]}{\Factorial{(k+1)}\Factorial{(n-k)}}
+	= 
+	\frac{\Factorial{n}(n+1)}{\Factorial{(k+1)}\Factorial{(n+1-1-k)}}
+	=
+	\binom{n+1}{k+1}	
+     \end{dmath*}
+  \end{proof}
+   
+
+
+
+\begin{remark}
+   \Cref{eq:binom:pascal} gives rise to a nice pictorial representation in terms of
+   the so-called Pascal's triangle, see \cref{fig:pascal}.
+\end{remark}
+   
+\begin{figure}
+   \centering
+   \begin{tikzpicture}
+      \foreach \n in {0,...,8} {
+	 \foreach \k in {0,...,\n} {
+	    \node at (\k-\n/2,-\n) {$ \binomialCoefficient{\n}{\k}$};
+	 }
+      }
+   \end{tikzpicture}
+   \caption{Picture of the first eight entries of the  Pascal's
+      triangle. The triangle is built recusively in this way: every entry
+      represents $\binom{n}{k}$ where $n$ is the row index and $k$ is the
+      column index; every entry is evaluated by computing the sum of the
+      corresponding two entries $\binom{n-1}{k-1}$ and $\binom{n-1}{k}$ in the
+      previous line, following \cref{eq:binom:pascal}.
+      The two sides of the triangle are vertically symmetric, as expected from
+      \cref{eq:binom:reflection}.
+      \label{fig:pascal} }
+\end{figure}
+
+
+\subsection{Newton's formula}
+
+\begin{theorem}
+   For every $x,y\in\R$ and $n\in\N$, 
+   \begin{dmath}[label={binom:newton}]
+      (x+y)^{n} = \sum_{k=0}^{n} \binom{n}{k} x^{k} y^{n-k}
+   \end{dmath}
+\end{theorem}
+
+\begin{remark}
+   Since $x+y = y+x$, \cref{eq:binom:newton} can equivalently be written as
+   \begin{dmath*}
+      (x+y)^{n} = \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^{k}
+   \end{dmath*}.
+   To prove the equivalence with \cref{eq:binom:newton}, replace $m = n-k$, so $k=n-m$ and 
+   \begin{dmath*}
+      (x+y)^{n} = \sum_{k=0}^{n} \binom{n}{k} x^{k} y^{n-k}
+      = \sum_{m=N}^{0} \binom{n}{n-m} x^{n-m} y^{m}
+      = \sum_{m=0}^{N} \binom{n}{m} x^{n-m} y^{m}
+   \end{dmath*},
+   where the symmetry property of the binomial coefficient has been used. 
+\end{remark}
+
+\begin{proof}
+   By induction on $n\in\N$. For $n=0$, \cref{eq:binom:newton} reads
+   \begin{dmath*}
+      (x+y)^{0} = \binom{0}{0} x^{0} y^{0}
+   \end{dmath*}
+   which is true.
+   Let us now prove that \cref{eq:binom:newton} for a given $n\in\N$ implies
+   \cref{eq:binom:newton} for $n+1$:
+   \begin{dmath*}
+      (x+y)^{n+1} 
+      = 
+      (x+y) (x+y)^{n}
+      = 
+      (x+y)\sum_{k=0}^{n} \binom{n}{k}x^{k} y^{n-k}
+      = 
+      \sum_{k=0}^{n} \binom{n}{k}x^{k+1} y^{n-k}
+      +
+      \sum_{k=0}^{n} \binom{n}{k}x^{k} y^{n+1-k}
+      = 
+      x^{n+1} 
+      +
+      \sum_{k=0}^{n-1} \binom{n}{k}x^{k+1} y^{n-k}
+      +
+      y^{n+1}
+      +
+      \sum_{k=1}^{n} \binom{n}{k}x^{k} y^{n+1-k}
+      = 
+      x^{n+1} 
+      +
+      \sum_{k=1}^{n} \binom{n}{k-1}x^{k} y^{n+1-k}
+      +
+      y^{n+1}
+      +
+      \sum_{k=1}^{n} \binom{n}{k}x^{k} y^{n+1-k}
+      =
+      x^{n+1} 
+      +
+      y^{n+1}
+      +
+      \sum_{k=1}^{n} \left[ \binom{n}{k-1} + \binom{n}{k} \right] x^{k} y^{n+1-k}
+      =
+      x^{n+1} 
+      +
+      y^{n+1}
+      +
+      \sum_{k=1}^{n} \binom{n+1}{k} x^{k} y^{n+1-k}
+      =
+      \sum_{k=0}^{n+1} \binom{n+1}{k} x^{k} y^{n+1-k}
+   \end{dmath*}.
+\end{proof}
+
+  Implications: 
+  \begin{dgroup*}
+     \begin{dmath*}[compact]
+	\sum_{k=0}^{n} \binom{n}{k} = (1+1)^{n} = 2^{n}
+     \end{dmath*},
+     \begin{dmath*}[compact]
+	\sum_{k=0}^{n} (-1)^{k} \binom{n}{k} = (1-1)^{n} = 0
+     \end{dmath*}.
+  \end{dgroup*}
+
+\begin{advanced}
+
+   \subsection{Vandermond's identity}
+
+   The following identity, which goes under the name of Vandermonde's identity,
+   is relevant for discussing the hypergeometric probability distribution
+   (\cref{sec:hypergeometric_distribution}); in particular, the normalization
+   condition of the hypergeometric distribution follows directly from  the Vandermond's
+   identity.
+   An algebraic proof of this identity is straightforward and relies on the Cauchy product of two
+   polynomials.
+
+   \begin{lemma}[Vandermond's identity]
+      For every $m,n,l\in\N$, 
+      \begin{dmath}
+	 \binom{n+m}{k} = \sum_{l=0}^{k} \binom{m}{k}\binom{n}{k-l}
+      \end{dmath}.
+   \end{lemma}
+
+   \begin{proof}
+
+      Consider
+      \begin{dmath*}
+	 (1 + x)^{m+n} = (1+x)^{m} (1+x)^{n}
+      \end{dmath*}.
+      Both sides can be expanded using  Newton's law:
+      \begin{dmath*}
+	 \sum_{l=0}^{n+m} \binom{n+m}{l} x^{l} = \left( \sum_{i=0}^{m}
+	    \binom{n}{i}x^{i}\right) \left( \sum_{j=0}^{n} \binom{n}{j} x^{j}\right)
+	 = 
+	 \sum_{l=0}^{m+n} \left( \sum_{j=0}^{i}
+	    \binom{m}{i}\binom{n}{j-i}\right) x^{i}
+      \end{dmath*}.
+      Applying the Cauchy's product formula on the right-hand side we get
+   \end{proof}
+
+  \subsection{Multinomial coefficient of non-negative integer arguments}
+
+  \begin{definition}
+     Let $n,m\in \N$.
+     For every $m$-dimensional configuration
+     \begin{dmath*}
+	\begin{pmatrix} n_{1} \\ \vdots \\ n_{m} \end{pmatrix} \in \N^{m}
+     \end{dmath*},
+     such that $0 \leq n_{k} \leq n $ for all $0\leq k \leq m$ and 
+     satisfying the constrain 
+     \begin{dmath}[label={multinomial:sumn}]
+	\sum_{k=1}^{m} n_{k} = n
+     \end{dmath},
+     the corresponding ``multinomial'' coefficient 
+$\binom{n}{n_{1}, n_{2}, \ldots, n_{m}} $
+     is defined as 
+     \begin{dmath}[label={multinomial:def1},frame]
+	\binom{n}{n_{1}, n_{2}, \ldots, n_{m}} \coloneqq
+	\Factorial{n} 
+	\prod_{k=1}^{m}\frac{1}{\Factorial{n_{k}}} 
+     \end{dmath}.
+  \end{definition}
+  Sometimes, the same multinomial coefficient is also denotes as follow
+  \begin{dmath}[label={multinomial:def2},frame]
+	\Multinomial{n_{1}, n_{2}, \ldots, n_{r}} \coloneqq
+	\frac{\Factorial{\left( \sum_{k=1}^{r}n_{k} +
+	      \right)}}{\prod_{k=1}^{r}\Factorial{n_{k}}} 
+     \end{dmath},
+  where the number $n$ is not explicitly written but can be easily recovered using the constrain
+  \cref{eq:multinomial:sumn}.
+
+  The binomial coefficient is a special case of the multinomial coefficient
+  using $m=2$, $n_{1} =k$, $n_{2} = n -k$, $0\leq k \leq n$.
+
+
+   \section{A number of additional properties of factorials and binomial
+      coefficients}
+   \subsection{Factorial and binomial coefficient of non-integer numbers}
+\label{sec:complex_factorial}
+
+Factorials and binomial coefficients can be generalized to arbitrary complex
+arguments in terms of the higher-trascendental gamma function%
+\footcite[For a review of properties, in particular about the case of negative
+integer arguments, have a look at \eg][]{Onl-kron:2015}.
+
+There is a number of equivalent ways to define the gamma special function. 
+One way to define it is as the \emph{unique} extension (up to certain
+regularity assumptions) of the factorial to real and complex numbers.
+The precise statement is provided by the theorems of Bohr-Mollerup (for
+the real case) and Wielandt (for the complex case).
+This approch makes clear how gamma function is related to the factorial.
+However, it should be stressed that the usefulness of gamma function cannot be
+understimated, it goes well beyond  this and finds 
+many applications also in contexts where the link with factorials is less evident. 
+
+
+\subsection{Binomial inversion}
+
+
+\subsection{Pascal matrices}
+
+\subsection{Relation  with Fibonacci numbers}
+
+Fibonacci numbers are defined in 
+   \cref{sec:fibonacci}. 
+   There exists a relation between binomial coefficients and Fibonacci numbers.
+\begin{lemma}
+   For every $n\in\N\backslash\{ 0 \}$, 
+   \begin{dmath}
+      \Fibonacci{n} = \sum_{k=0}^{\floor*{\frac{n-1}{2}}} \binom{n-k-1}{k}
+   \end{dmath},
+   where $\floor{\cdot}$ denotes the floor function%
+   \footnote{The floor function $\fullfunction{\floor{\cdot}}{\R}{\N}$ is
+      defined as $\floor{x} = \sup[n\in\N]{\Set{n| x \geq n }}$. The notation
+      is due to Kenneth E. Iverson.},
+   and $\Fibonacci{n}$ denotes the
+   \mynth{$n$} Fibonacci number.
+\end{lemma}
+
+
+
+\end{advanced}
+   \section{Basic set theory and the power set}
+
+   \begin{definition}
+      Let $\Omega$ be any set.
+      The set of all subsets of $\Omega$ is called the ``power set'' of
+      $\Omega$ and is denoted by $2^{\Omega}$.
+   \end{definition}
+
+   The existence of the power set is an axiom in standard set theory.
+   For every $\Omega$, the empty set and $\Omega$ itself are in $2^{\Omega}$:
+   $\varnothing \in 2^{\Omega}$ and 
+   $\Omega \in 2^{\Omega}$. 
+   The special notation $2^{\Omega}$ will become clear later when discussing
+   the ``cardinality'' of $2^{\Omega}$ for finite sets $\Omega$.
+
+   
+   \begin{lemma}
+Let $\Omega$ a finite set with cardinality $N\in\N$.
+Then, $2^{\Omega}$ has cardinality $2^{N}$.
+   \end{lemma}
+
+   In words: if $\Omega$ has $N$ and only $N$ distinct elements, then there are 
+   $2^{N}$ possible distinct subsets of $\Omega$ (including $\Omega$ itself and
+   the empty set).
+
+   \section{Permutations}
+
+   \subsection{Permutations without repetition}
+
+   Intuitively speaking, a ``permutation'' of a set of $N$ elements
+   should be thought as a way of sorting or re-arranging the $N$ elements.
+   At a mathematical level, this is implemented as a bijection from the set of
+   $N$ elements to itself.
+   
+   \begin{definition}[Permutation]
+      Let $\Omega$ be a set.
+      A ``permutation'' of $\Omega$ is any bijective application fro $\Omega$
+      to itself. 
+   \end{definition}
+
+   \begin{lemma}
+      Let $\Omega$ be a finite set with $\card{\Omega} = N$ for some $N\in\N$.
+      The number of all and only the permutations of $\Omega$ is
+      $\Factorial{n}$.
+   \end{lemma}
+   \begin{proof}
+
+
+   \end{proof}
+
+   \subsection{Permutations with repetition}
+   
+
+   \section{Dispositions} 
+   \subsection{Dispositions without repetition}
+   \subsection{Dispositions with repetition}
+   
+   \section{Combinations}
+   \subsection{Combinations without repetition}
+   
+
+   \begin{definition}[combinations]
+
+      Let $\Omega$ a finite set of cardinality $\card{\Omega} = N$ for 
+      $N\in\N$ and 
+      $k\in\N$, with  $0\leq k \leq N$.
+      A ``$k$-combination'' of $A$ is any subset of $\Omega$ of
+      cardinality $k$.
+   \end{definition}
+
+   In words: a $k$-combination of a set $\Omega$ of $N$ elements  is any subset
+   of $\Omega$ having precisely $k$ distinc elements. 
+
+   In combinatorics we refer to a $k$-combination of $\Omega$ as a ``way of 
+   extracting $k$ different elements out of a set of   $N$ elements'', or as a 
+   ``way of extracting $k$ elements at a time from a set of $N$ elements''.
+    
+   If we think of a $k$-combination as a way to ``extract'' $k$ different
+   elements from a set of $N$ total elements, it should be stressed that 
+   \begin{itemize}
+	 \item there is no ``repetition'': all $k$ elements are distinct ones; (in
+	    fact, a $k$-combination is just a subset of $\Omega$, so we can't
+	    have the same element of $\Omega$ more than once in a given
+	    $k$-combination);
+	 \item there is no ``order'': given a $k$-combination $A$ of $\Omega$,
+	    we can only say whether a given element $\omega \in \Omega$ belongs
+	    to $A$ or not; there is no notion that allows us to ``sort'' the
+	    elements of $A$.
+      \end{itemize}
+
+   To introduce repetion we should work with $\Omega^{k}$ instead of $\Omega$;
+   this will lead us to discuss ``$k$-combinations with repetition''.
+   To introduce a notion of ``order'' in $\Omega$ or $\Omega^{k}$ we will
+   consider applications from $\Set{1,\ldots,k}$ to $\Omega$: this will lead us
+   to discuss dispositions (arrangements).
+
+   \begin{lemma}
+      Let $\Omega$ a finite set of cardinality $\card{\Omega} = N$ for 
+      $N\in\N$ and 
+      $k\in\N$, with  $0\leq k \leq N$.
+      The subset of $2^{\Omega}$ of all and only the $k$-combinations of
+      $\Omega$ has cardinality $\binom{N}{k}$.
+   \end{lemma}
+
+   In words: the number of all and only the possible subsets of $\Omega$ having
+   precisely $k$ many items is $\binom{N}{k}$.
+
+   \begin{proof}
+   \end{proof}
+
+   \subsection{Combinations with repetition}
+
+\begin{table}
+  \caption{Summary}
+  \begin{tabularx}{\textwidth}{Xll} \toprule
+    & \tableheadline{without repetition} & \tableheadline{with repetition} \\ \midrule
+    permutations of $n$ elements & $\Factorial{n}$ & $\Factorial{N} \prod_{j=1}^{k}  \frac{1}{\Factorial{n_{j}}}$ \\
+    $k$-combinations of $n$ elements & $\binom{n}{k}$ & $\binom{n+k-1}{k}$ \\
+    $k$-arrangements of $n$ elements & $\dfrac{\Factorial{n}}{\Factorial{(n-k)}}$ & $n^{k}$ \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+
+
+   \section{Inclusion-exclusion theorem}
+
+   \begin{figure}
+      \centering
+      \begin{tikzpicture}
+	 \begin{scope}[shift={(3cm,-5cm)}, fill opacity=0.5]
+	    \fill[red] \firstcircle;
+	    \fill[green] \secondcircle;
+	    \fill[blue] \thirdcircle;
+	    \draw \firstcircle node[below] {$A$};
+	    \draw \secondcircle node [above] {$B$};
+	    \draw \thirdcircle node [below] {$C$};
+	 \end{scope}
+      \end{tikzpicture}
+      \caption{Illustration of the inclusion-exclusion strategy}
+   \end{figure}
+
+   \section{What's the use of all this?}
+   Combinatorics prove useful 
+
+
+\printbibliography[heading=subbibliography]
+\end{refsection}
+   
+
+
