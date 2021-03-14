@@ -405,62 +405,60 @@
 					  % mathlap,etc.
 					  \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
 					  \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
-\usepackage[mathpazo]{flexisym}              % Add support to Euler font
-\usepackage{breqn}                        % Breqn
-\catcode`\_=8 % for safety
-%\catcode`_=12
-%\catcode`^=12
+\usepackage[euler]{flexisym}              % Add support to Euler font
+%\usepackage{breqn}                        % Breqn
+%\catcode`\_=8 % for safety
 
 %\makeatletter
 %   \def\eqnumsize{\normalfont \Tf@font}   % Add support to Minion Pro
 %\makeatother
 
-\setkeys{breqn}{labelprefix={eq:}}
+%\setkeys{breqn}{labelprefix={eq:}}
 
-\newcommand\coloneqq{\mathrel{:\mkern-1.2mu=}}
+%\newcommand\coloneqq{\mathrel{:\mkern-1.2mu=}}
 
 % *****************************************************************************
 % 	Feyn support for breqn
 % *****************************************************************************
 \usepackage[noglobalbang]{feyn}
-\makeatletter
-\def\vertexlabel#1#2{
-   \setbox0=\hbox to 0pt{\hss$\scriptstyle #2$\hss}
-   \begingroup
-   \lccode`|=`^
-   \lccode`!=`_
-  \ifcat #1|
- \endgroup
-    \vbox to 0pt{\vss\box0\nointerlineskip\kern2\feyn@maxis}
-  \else\ifcat #1!
- \endgroup
-    \vbox to 0pt{\kern\feyn@maxis\nointerlineskip\box0\vss}
-  \else
- \endgroup
-    \PackageError{feyn}
-      {Bad arguments for \string\vertexlabel}
-      {Usage: \string\vertexlabel^{text} or \string\vertexlabel_{text}}
- \fi\fi
-  }
-  \makeatother
-
-
+% \makeatletter
+% \def\vertexlabel#1#2{
+%    \setbox0=\hbox to 0pt{\hss$\scriptstyle #2$\hss}
+%    \begingroup
+%    \lccode`|=`^
+%    \lccode`!=`_
+%   \ifcat #1|
+%  \endgroup
+%     \vbox to 0pt{\vss\box0\nointerlineskip\kern2\feyn@maxis}
+%   \else\ifcat #1!
+%  \endgroup
+%     \vbox to 0pt{\kern\feyn@maxis\nointerlineskip\box0\vss}
+%   \else
+%  \endgroup
+%     \PackageError{feyn}
+%       {Bad arguments for \string\vertexlabel}
+%       {Usage: \string\vertexlabel^{text} or \string\vertexlabel_{text}}
+%  \fi\fi
+%   }
+%   \makeatother
+% 
+% 
 
 % *****************************************************************************
 % 	Cleveref support for breqn
 % *****************************************************************************
 
-\makeatletter
-\renewcommand\set@label[2]{\protected@edef\@currentlabel{#2}
-\cref@constructprefix{equation}{\cref@result}%
-\protected@xdef\cref@currentlabel{%
-[equation][\arabic{equation}][\cref@result]\eq@number}
-  %%% Work in progress... Support for hyperref 
-  \hyper@makecurrent{equation}
-  \Hy@raisedlink{\hyper@anchorstart{\@currentHref}}
-  \Hy@raisedlink{\hyper@anchorend}
-}
-\makeatother
+% \makeatletter
+% \renewcommand\set@label[2]{\protected@edef\@currentlabel{#2}
+% \cref@constructprefix{equation}{\cref@result}%
+% \protected@xdef\cref@currentlabel{%
+% [equation][\arabic{equation}][\cref@result]\eq@number}
+%   %%% Work in progress... Support for hyperref 
+%   \hyper@makecurrent{equation}
+%   \Hy@raisedlink{\hyper@anchorstart{\@currentHref}}
+%   \Hy@raisedlink{\hyper@anchorend}
+% }
+% \makeatother
 
 %\input{kerning.tex}
 
@@ -472,9 +470,9 @@
 % Palatino 	11pt: 312--336pt | 657--705pt
 % Palatino 	12pt: 360--384pt | 768pt
 
-\areaset[current]{336pt}{750pt}
-\setlength{\marginparwidth}{7em}
-\setlength{\marginparsep}{2em}%
+%\areaset[current]{336pt}{750pt}
+%\setlength{\marginparwidth}{7em}
+%\setlength{\marginparsep}{2em}%
 
 % *****************************************************************************
 % 	 Sections and optional sections
