@@ -9,8 +9,6 @@
 % Indica a LaTeX la cartella dove sono riposti i file delle immagini
 \graphicspath{{./},{./Asymptote/}, {./Images/}, {./Metapost/}}
 
-% Un ambiente ad hoc per gli approfondimenti (definirlo si, ma magari in altro
-% modo)
 \newenvironment{approfondimento}%
 {\begin{quoting}}
   {\end{quoting}}
@@ -86,20 +84,6 @@
 %\AdaptNoteOpt\footcite\multfootcite
 %\AdaptNoteOpt\autocite\multautocite
 
-
-\usepackage[super]{nth}
-     \usepackage{xstring}
-\newcommand*{\IsInteger}[3]{%
-   \IfStrEq{#1}{ }{%
-           #3% is a blank string
-	}{%
-	   \IfInteger{#1}{#2}{#3}%
-	}%
-     }%
-     \newcommand{\mynth}[1]{%
-	\IfInteger{#1}{\nth{#1}}{#1\nthscript{th}}
-     }
-
 % *****************************************************************************
 % 	Additional hyperref stuff (to be improved)
 % *****************************************************************************
@@ -128,10 +112,6 @@
 % 	Mathematica Packages
 % *****************************************************************************
 
-% Save accent for wick.sty (eulervm already downloaded)
-\let\oldhat\hat
-\let\oldbar\bar
-
 % A.M.S. standard packages.
 \usepackage{amssymb}
 
@@ -152,13 +132,7 @@
 %\newcommand{\conj}[1]{#1^{*}} 
 \newcommand{\adj}[1]{#1^{\dagger}}
 
-% Un ambiente per i sistemi.
-\newenvironment{sistema}%
-  {\left\lbrace\begin{array}{@{}l@{}}}%
-  {\end{array}\right.}
- 
-% Cool package. (Non male per funzioni speciali e spazitura integrali, ma poco
-% customizzabile per integrali multiple)
+% Cool package (special functions, integrals etc)
 \usepackage{cool}
 \makeatletter
   \Style{ArcTrig=arc}
@@ -180,96 +154,6 @@
 %\usepackage[commonsets=true,notation=iso]{skmath}
 \usepackage[commonsets=true]{skmath}
 \usepackage{skmath_amends}
-\newcommand{\pauli}{\sigma}
-% Groups
-\DeclareDocumentCommand\SU{m}{%
-   \ensuremath{\operatorname{SU}(#1)}}
-\DeclareDocumentCommand\SO{m}{%
-   \ensuremath{\operatorname{SO}(#1)}}
-
-% path integrals with cool, to allow for better spacing
-\makeatletter
-\newcommand{\pathint}[2]
-{
-   %\begingroup
-   \let\oldd\COOL@notation@IntegrateDifferentialDSymb
-   \renewcommand{\COOL@notation@IntegrateDifferentialDSymb}{\mathcal{D}}
-   \Int{#1}{#2}
-   \let\COOL@notation@IntegrateDifferentialDSymb\oldd
-%\endgroup
-}
-\makeatother
-
-\makeatletter
-\newcommand{\MultipleIntegrate}[4]{%
-   \int_{#3}^{#4}  #1 
-   \@for\df:=#2\do{%
-      \,
-      \COOL@notation@IntegrateDifferentialDSymb{}\df%
-   }
-}
-\makeatother
-
-\makeatletter
-\newcommand{\oInt}[2]{%
-\listval{#2}{0}%
-\setcounter{COOL@listlen}{\value{COOL@listpointer}}%
-\ifthenelse{ \value{COOL@listlen} = 1 }%
-{%
-\ifthenelse{\equal{\COOL@notation@IntegrateDisplayFunc}{outset}}%
-{%
-\oint \! \COOL@notation@IntegrateDifferentialDSymb{}#2 \, #1%
-}%
-{ \ifthenelse{\equal{\COOL@notation@IntegrateDisplayFunc}{inset}}%
-{%
-\oint #1 \, \COOL@notation@IntegrateDifferentialDSymb{}#2%
-}%
-{%
-\PackageError{cool}{Invalid Option Sent}%
-{`DisplayFunc' can only be `inset' or `outset'}%
-}}%
-}%
-{ \ifthenelse{ \value{COOL@listlen} = 2 }%
-{%
-\ifthenelse{\equal{\COOL@notation@IntegrateDisplayFunc}{outset}}%
-{%
-\oint_{\listval{#2}{2}} \!
-\COOL@notation@IntegrateDifferentialDSymb{}{\listval{#2}{1}} \, #1%
-}%
-{ \ifthenelse{\equal{\COOL@notation@IntegrateDisplayFunc}{inset}}%
-{%
-\oint_{\listval{#2}{2}} #1 \,
-\COOL@notation@IntegrateDifferentialDSymb{}{\listval{#2}{1}}%
-}%
-{%
-\PackageError{cool}{Invalid Option Sent}%
-{`DisplayFunc' can only be `inset' or `outset'}%
-}}%
-}%
-{ \ifthenelse{ \value{COOL@listlen} = 3 }%
-{%
-\ifthenelse{\equal{\COOL@notation@IntegrateDisplayFunc}{outset}}%
-{%
-\oint_{\listval{#2}{2}}^{\listval{#2}{3}} \!
-\COOL@notation@IntegrateDifferentialDSymb{}{\listval{#2}{1}} \, #1%
-}%
-{ \ifthenelse{\equal{\COOL@notation@IntegrateDisplayFunc}{inset}}%
-{%
-\oint_{\listval{#2}{2}}^{\listval{#2}{3}} #1 \,
-\COOL@notation@IntegrateDifferentialDSymb{}{\listval{#2}{1}}%
-}%
-{%
-\PackageError{cool}{Invalid Option Sent}%
-{`DisplayFunc' can only be `inset' or `outset'}%
-}}%
-}%
-{%
-\PackageError{cool}{`Integrate' has invalid parameter list}%
-   {this happens when the second argument has more than two commas}%
-}}}%
-}%
-\makeatother
-
 
 % *****************************************************************************
 % 	Cleveref support for breqn
@@ -313,17 +197,6 @@
 \renewcommand{\qedsymbol}{\rule{.5em}{.5em}}
 
 % *****************************************************************************
-% 	Exercise environment 
-% *****************************************************************************
-
-\usepackage{tcolorbox}
-% *****************************************************************************
-% 	Vectors 
-% *****************************************************************************
-\MakeRobust\vec
-
-
-% *****************************************************************************
 % 	Biblatex 
 % *****************************************************************************
 
@@ -333,12 +206,8 @@
 \cleardoublepage
 \manualmark
 \phantomsection
-%\ifminitoc
-%\mtcaddchapter[\numberline{}\tocEntry{\bibname}]
-%\else
 \addtocontents{toc}{\protect\vspace{\beforebibskip}}
 \addcontentsline{toc}{chapter}{\numberline{}\tocEntry{\bibname}}
-%\fi
 \myChapter*{\bibname\markboth{\spacedlowsmallcaps{\bibname}}
 {\spacedlowsmallcaps{\bibname}}}}     
 
@@ -405,60 +274,60 @@
 					  % mathlap,etc.
 					  \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
 					  \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
-%\usepackage[euler]{flexisym}              % Add support to Euler font
-%\usepackage{breqn}                        % Breqn
-%\catcode`\_=8 % for safety
+\usepackage{flexisym}              % Add support to Euler font
+\usepackage{breqn}                        % Breqn
+\catcode`\_=8 % for safety
 
 %\makeatletter
 %   \def\eqnumsize{\normalfont \Tf@font}   % Add support to Minion Pro
 %\makeatother
 
-%\setkeys{breqn}{labelprefix={eq:}}
+\setkeys{breqn}{labelprefix={eq:}}
 
-%\newcommand\coloneqq{\mathrel{:\mkern-1.2mu=}}
+\newcommand\coloneqq{\mathrel{:\mkern-1.2mu=}}
 
 % *****************************************************************************
 % 	Feyn support for breqn
 % *****************************************************************************
 \usepackage[noglobalbang]{feyn}
-% \makeatletter
-% \def\vertexlabel#1#2{
-%    \setbox0=\hbox to 0pt{\hss$\scriptstyle #2$\hss}
-%    \begingroup
-%    \lccode`|=`^
-%    \lccode`!=`_
-%   \ifcat #1|
-%  \endgroup
-%     \vbox to 0pt{\vss\box0\nointerlineskip\kern2\feyn@maxis}
-%   \else\ifcat #1!
-%  \endgroup
-%     \vbox to 0pt{\kern\feyn@maxis\nointerlineskip\box0\vss}
-%   \else
-%  \endgroup
-%     \PackageError{feyn}
-%       {Bad arguments for \string\vertexlabel}
-%       {Usage: \string\vertexlabel^{text} or \string\vertexlabel_{text}}
-%  \fi\fi
-%   }
-%   \makeatother
-% 
-% 
+\makeatletter
+\def\vertexlabel#1#2{
+   \setbox0=\hbox to 0pt{\hss$\scriptstyle #2$\hss}
+   \begingroup
+   \lccode`|=`^
+   \lccode`!=`_
+  \ifcat #1|
+ \endgroup
+    \vbox to 0pt{\vss\box0\nointerlineskip\kern2\feyn@maxis}
+  \else\ifcat #1!
+ \endgroup
+    \vbox to 0pt{\kern\feyn@maxis\nointerlineskip\box0\vss}
+  \else
+ \endgroup
+    \PackageError{feyn}
+      {Bad arguments for \string\vertexlabel}
+      {Usage: \string\vertexlabel^{text} or \string\vertexlabel_{text}}
+ \fi\fi
+  }
+  \makeatother
+
+
 
 % *****************************************************************************
 % 	Cleveref support for breqn
 % *****************************************************************************
 
-% \makeatletter
-% \renewcommand\set@label[2]{\protected@edef\@currentlabel{#2}
-% \cref@constructprefix{equation}{\cref@result}%
-% \protected@xdef\cref@currentlabel{%
-% [equation][\arabic{equation}][\cref@result]\eq@number}
-%   %%% Work in progress... Support for hyperref 
-%   \hyper@makecurrent{equation}
-%   \Hy@raisedlink{\hyper@anchorstart{\@currentHref}}
-%   \Hy@raisedlink{\hyper@anchorend}
-% }
-% \makeatother
+\makeatletter
+\renewcommand\set@label[2]{\protected@edef\@currentlabel{#2}
+\cref@constructprefix{equation}{\cref@result}%
+\protected@xdef\cref@currentlabel{%
+[equation][\arabic{equation}][\cref@result]\eq@number}
+  %%% Work in progress... Support for hyperref 
+  \hyper@makecurrent{equation}
+  \Hy@raisedlink{\hyper@anchorstart{\@currentHref}}
+  \Hy@raisedlink{\hyper@anchorend}
+}
+\makeatother
 
 %\input{kerning.tex}
 
@@ -470,9 +339,9 @@
 % Palatino 	11pt: 312--336pt | 657--705pt
 % Palatino 	12pt: 360--384pt | 768pt
 
-%\areaset[current]{336pt}{750pt}
-%\setlength{\marginparwidth}{7em}
-%\setlength{\marginparsep}{2em}%
+\areaset[current]{336pt}{750pt}
+\setlength{\marginparwidth}{7em}
+\setlength{\marginparsep}{2em}%
 
 % *****************************************************************************
 % 	 Sections and optional sections
@@ -564,7 +433,6 @@
 
 \usepackage{nicefrac}
 \usepackage{calligra}
-%\usepackage{sidenotes}
 
 
 \usepackage{paralist}
@@ -577,10 +445,6 @@
 
 \usepackage[perpage, symbol*, stable, multiple]{footmisc}	
 \setlength{\footnotemargin}{.6em}%
-%\usepackage{footnpag}
-%\makeatletter
-%      \renewcommand*\thefootnote{\@fnsymbol\c@footnote}%
-%      \makeatother
 \input{my-footnote-stuff}
 \usepackage{footnotebackref}
 
@@ -605,27 +469,5 @@
 \crefname{problem}{l'esercizio}{gli esercizi}%
 
 
-% Rewrite the appendix macro to avoid side effects on footnotes spacing
-
-%\makeatletter
-%\renewcommand*\appendix{\par%
-%  \setcounter{chapter}{0}%
-%  \setcounter{section}{0}%
-%  \gdef\@chapapp{\appendixname}%
-%  \gdef\thechapter{\@Alph\c@chapter}%
-%  %\csname appendixmore\endcsname
-%}
-%\makeatother
-
-\newtcolorbox[auto counter,number within=section]{pabox}[2][]{%
-   colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,
-   title=Exercise.~\thetcbcounter: #2,#1}
-
-\newenvironment{Exercise}{\begin{exercise}}{\end{exercise}}
-\newenvironment{Example}{\begin{example}}{\end{example}}
-
-
 \usepackage{enumitem}                          % Url.
 
-\renewcommand{\complement}[2]{#2\backslash #1}
-%\input{kerning4}
